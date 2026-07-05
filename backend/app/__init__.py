@@ -13,10 +13,11 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    CORS(app, supports_credentials=True)
-    db.init_app(app)
-    bcrypt.init_app(app)
-    jwt.init_app(app)
+    CORS(app, supports_credentials=True, origins=[
+    "http://localhost:5173",
+    "https://studyforge-2-0.vercel.app/",
+    "https://*.vercel.app"
+])
 
     from app.routes.health import health_bp
     app.register_blueprint(health_bp)
